@@ -85,8 +85,8 @@ opposite_num() {
 }
 
 defog() {
-    futility gbb --set --flash --flags=0x8091 || true # we use futility here instead of the commented out command below because we expect newer chromeos versions and don't want to wait 30 seconds
-    # /usr/share/vboot/bin/set_gbb_flags.sh 0x8091
+    futility gbb --set --flash --flags=0x80b7 || true # we use futility here instead of the commented out command below because we expect newer chromeos versions and don't want to wait 30 seconds
+    # /usr/share/vboot/bin/set_gbb_flags.sh 0x80b7
     crossystem block_devmode=0 || true
     vpd -i RW_VPD -s block_devmode=0 || true
     vpd -i RW_VPD -s check_enrollment=1 || true
@@ -313,7 +313,7 @@ murkmod() {
         cgpt add "$dst" -i 4 -P 0
         cgpt add "$dst" -i 2 -P 0
         cgpt add "$dst" -i "$tgt_kern" -P 1
-        echo "Defogging... (if write-protect is disabled, this will set GBB flags to 0x8091)"
+        echo "Defogging... (if write-protect is disabled, this will set GBB flags to 0x80b7)"
         defog
         echo "Cleaning up..."
         losetup -d "$loop"
